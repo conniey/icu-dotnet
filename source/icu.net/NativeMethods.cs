@@ -79,7 +79,7 @@ namespace Icu
 
 		private static bool IsWindows
 		{
-			get { return Environment.OSVersion.Platform != PlatformID.Unix; }
+			get { return Platform.OperatingSystem == OperatingSystemType.Windows; }
 		}
 
 		private static IntPtr IcuCommonLibHandle
