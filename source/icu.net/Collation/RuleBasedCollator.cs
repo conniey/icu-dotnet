@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-#if !NETSTANDARD
+#if NETSTANDARD
+using Icu;
+#else
 using System.Globalization;
 using System.Runtime.ConstrainedExecution;
 #endif

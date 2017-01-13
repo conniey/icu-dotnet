@@ -36,7 +36,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-
   <!-- Defining common properties in one location. -->
   <PropertyGroup>
     <PlatformAlias>netstandard1.5</PlatformAlias>
@@ -44,10 +43,8 @@
     <ConfiguredBaseOutputPath>$(Configuration)\$(PlatformAlias)</ConfiguredBaseOutputPath>
     <IntermediateOutputPath>obj\$(ConfiguredBaseOutputPath)</IntermediateOutputPath>
     <OutputPath>..\..\output\$(ConfiguredBaseOutputPath)</OutputPath>
-
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
-
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>icu.net.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -79,6 +76,7 @@
     <Compile Include="ParseErrorException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleBasedBreakIterator.cs" />
+    <Compile Include="SortKey.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="IcuWrapper.cs" />
     <Compile Include="NativeMethods.cs" />
@@ -96,7 +94,6 @@
     <None Include="NuGetAssets\icu.net.netstandard.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-
   <Target Name="AfterBuild" Condition="'$(OS)'!='Unix'">
     <PropertyGroup>
       <NuGetBuildFolder>$(SolutionDir)NuGetBuild/$(PlatformAlias)</NuGetBuildFolder>
@@ -109,7 +106,6 @@
     <CreateProperty Value="0" Condition=" '$(BuildCounter)' == ''">
       <Output PropertyName="BuildCounter" TaskParameter="Value" />
     </CreateProperty>
-
     <MakeDir Directories="$(NuGetBuildFolder)" Condition="!Exists('$(NuGetBuildFolder)')" />
     <Copy SourceFiles="$(NuGetAssetsFolder)/icu.net.netstandard.nuspec" DestinationFiles="$(NuGetBuildFolder)/icu.net.nuspec" />
     <Copy SourceFiles="@(IcuDotNetFiles)" DestinationFolder="$(NuGetBuildFolder)/lib/net40" />
