@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EB079966-AAFA-4B54-9505-6F2A86EDFADF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Icu.Tests</RootNamespace>
+    <AssemblyName>icu.net.netstandard.tests</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile />
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- Defining common properties in one location. -->
+  <PropertyGroup>
+    <PlatformAlias>netstandard1.6</PlatformAlias>
+    <DefineConstants>$(DefineConstants);ICU_VER_$(icu_ver);NETSTANDARD</DefineConstants>
+    <ConfiguredBaseOutputPath>$(Configuration)\$(PlatformAlias)</ConfiguredBaseOutputPath>
+    <IntermediateOutputPath>obj\$(ConfiguredBaseOutputPath)</IntermediateOutputPath>
+    <OutputPath>..\..\output\$(ConfiguredBaseOutputPath)</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="icu.net.netstandard.tests.project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BreakIteratorTests.Chinese.cs" />
+    <Compile Include="BreakIteratorTests.JDKCompatibility.cs" />
+    <Compile Include="Collation\CollatorTests.cs" />
+    <Compile Include="Collation\SortKeyTests.cs" />
+    <Compile Include="NativeMethodsTests.cs" />
+    <Compile Include="Collation\RuleBasedCollatorTests.cs" />
+    <Compile Include="LocaleTests.cs" />
+    <Compile Include="CharacterTests.cs" />
+    <Compile Include="UnicodeStringTests.cs" />
+    <Compile Include="UnicodeSetTests.cs" />
+    <Compile Include="NormalizerTests.cs" />
+    <Compile Include="BreakIteratorTests.cs" />
+    <Compile Include="IcuWrapperTests.cs" />
+    <Compile Include="VersionInfoTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\icu.net\icu.net.netstandard.csproj">
+      <Project>{c6920656-0990-4f54-a2e3-038c26018325}</Project>
+      <Name>icu.net.netstandard</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <NuGetTargetMoniker>.NETStandard,Version=v1.6</NuGetTargetMoniker>
+  </PropertyGroup>
+</Project>
