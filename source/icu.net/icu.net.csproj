@@ -111,7 +111,7 @@
   <!-- Defining common properties in one location. -->
   <PropertyGroup>
     <OutputPath>..\..\output\$(Configuration)</OutputPath>
-    <DefineConstants>$(DefineConstants);ICU_VER_$(icu_ver)</DefineConstants>
+    <DefineConstants>$(DefineConstants);ICU_VER_$(icu_ver);FEATURE_ICLONEABLE</DefineConstants>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
