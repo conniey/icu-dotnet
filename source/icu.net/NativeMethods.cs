@@ -106,7 +106,13 @@ namespace Icu
 		{
 			get
 			{
-				var uri = new Uri(Assembly.GetExecutingAssembly().CodeBase);
+				//NOTE: .GetTypeInfo() is not supported until .NET 4.5 onwards.
+#if NET40
+				Assembly currentAssembly = typeof(NativeMethods).Assembly;
+#else
+				Assembly currentAssembly = typeof(NativeMethods).GetTypeInfo().Assembly;
+#endif
+				var uri = new Uri(currentAssembly.CodeBase);
 				return Path.GetDirectoryName(uri.LocalPath);
 			}
 		}
@@ -1190,7 +1196,7 @@ namespace Icu
 			return Methods.u_isspace(characterCode);
 		}
 
-		#region LCID
+#region LCID
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>Get the ICU LCID for a locale</summary>
