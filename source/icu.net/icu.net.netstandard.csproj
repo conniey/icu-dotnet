@@ -117,6 +117,19 @@
   <PropertyGroup>
     <PreBuildEvent />
   </PropertyGroup>
+  <!-- NOTE: This is a hack since the GitVersionTask does not exist for .NET 
+    Standard. We are piggy backing off of the package import that the full .NET
+    Framework library, icu.net, imports into its project. -->
+  <PropertyGroup>
+    <GitVersionTaskTargets>..\packages\GitVersionTask.4.0.0-beta0009\build\GitVersionTask.targets</GitVersionTaskTargets>
+  </PropertyGroup>
+  <Import Project="$(GitVersionTaskTargets)" Condition="Exists('$(GitVersionTaskTargets)')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Cannot find file {0} required for GitVersion. Has the GitVersionTask package version in icu.net changed? If so, update Property 'GitVersionTaskTargets' in icu.net.netstandard.csproj with the new path. If not, restore packages in icu.net.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(GitVersionTaskTargets)')" Text="$([System.String]::Format('$(ErrorText)', '$(GitVersionTaskTargets)'))" />
+  </Target>
   <PropertyGroup>
     <NuGetTargetMoniker>.NETStandard,Version=v1.5</NuGetTargetMoniker>
   </PropertyGroup>
