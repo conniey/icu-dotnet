@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$-alpha</version>
+    <authors>SIL International</authors>
+    <licenseUrl>https://github.com/sillsdev/icu-dotnet/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sillsdev/icu-dotnet</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>icu.net is a C# Wrapper around ICU4C</description>
+    <language>en-US</language>
+    <dependencies>
+      <group targetFramework="net40" />
+      <group targetFramework="netstandard1.5">
+        <dependency id="NETStandard.Library" version="1.6.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

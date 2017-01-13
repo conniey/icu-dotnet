@@ -1,6 +1,7 @@
 ﻿{
   "dependencies": {
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.0",
+    "PepitaPackage": "1.21.4"
   },
   "frameworks": {
     "netstandard1.5": {

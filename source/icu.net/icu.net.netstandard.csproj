@@ -36,16 +36,19 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+
   <!-- Defining common properties in one location. -->
   <PropertyGroup>
     <PlatformAlias>netstandard1.5</PlatformAlias>
     <DefineConstants>$(DefineConstants);ICU_VER_$(icu_ver);NETSTANDARD</DefineConstants>
-
     <ConfiguredBaseOutputPath>$(Configuration)\$(PlatformAlias)</ConfiguredBaseOutputPath>
     <IntermediateOutputPath>obj\$(ConfiguredBaseOutputPath)</IntermediateOutputPath>
     <OutputPath>..\..\output\$(ConfiguredBaseOutputPath)</OutputPath>
 
     <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <AssemblyOriginatorKeyFile>icu.net.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
@@ -93,13 +96,30 @@
     <None Include="NuGetAssets\icu.net.netstandard.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+
+  <Target Name="AfterBuild" Condition="'$(OS)'!='Unix'">
+    <PropertyGroup>
+      <NuGetBuildFolder>$(SolutionDir)NuGetBuild/$(PlatformAlias)</NuGetBuildFolder>
+      <NuGetAssetsFolder>$(ProjectDir)NuGetAssets</NuGetAssetsFolder>
+    </PropertyGroup>
+    <ItemGroup>
+      <IcuDotNetFiles Include="$(TargetDir)..\icu.net.dll*;$(TargetDir)..\icu.net.pdb" />
+      <IcuDotNetCoreFiles Include="$(TargetDir)\icu.net.dll*;$(TargetDir)..\icu.net.pdb" />
+    </ItemGroup>
+    <CreateProperty Value="0" Condition=" '$(BuildCounter)' == ''">
+      <Output PropertyName="BuildCounter" TaskParameter="Value" />
+    </CreateProperty>
+
+    <MakeDir Directories="$(NuGetBuildFolder)" Condition="!Exists('$(NuGetBuildFolder)')" />
+    <Copy SourceFiles="$(NuGetAssetsFolder)/icu.net.netstandard.nuspec" DestinationFiles="$(NuGetBuildFolder)/icu.net.nuspec" />
+    <Copy SourceFiles="@(IcuDotNetFiles)" DestinationFolder="$(NuGetBuildFolder)/lib/net40" />
+    <Copy SourceFiles="@(IcuDotNetCoreFiles)" DestinationFolder="$(NuGetBuildFolder)/lib/$(PlatformAlias)" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(NuGetBuildFolder)" MetadataAssembly="$(TargetPath)" Version="$(GitVersion_NuGetVersion)" />
+    <Message Importance="High" Text="Created nuget package version $(GitVersion_NuGetVersion) ($(GitVersion_FullSemVer))" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <PropertyGroup>
+    <PreBuildEvent />
+  </PropertyGroup>
   <PropertyGroup>
     <NuGetTargetMoniker>.NETStandard,Version=v1.5</NuGetTargetMoniker>
   </PropertyGroup>
