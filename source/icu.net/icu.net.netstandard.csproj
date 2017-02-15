@@ -38,7 +38,7 @@
   </PropertyGroup>
   <!-- Defining common properties in one location. -->
   <PropertyGroup>
-    <PlatformAlias>netstandard1.5</PlatformAlias>
+    <PlatformAlias>netstandard1.6</PlatformAlias>
     <DefineConstants>$(DefineConstants);ICU_VER_$(icu_ver);NETSTANDARD</DefineConstants>
     <ConfiguredBaseOutputPath>$(Configuration)\$(PlatformAlias)</ConfiguredBaseOutputPath>
     <IntermediateOutputPath>obj\$(ConfiguredBaseOutputPath)</IntermediateOutputPath>
@@ -131,6 +131,6 @@
     <Error Condition="!Exists('$(GitVersionTaskTargets)')" Text="$([System.String]::Format('$(ErrorText)', '$(GitVersionTaskTargets)'))" />
   </Target>
   <PropertyGroup>
-    <NuGetTargetMoniker>.NETStandard,Version=v1.5</NuGetTargetMoniker>
+    <NuGetTargetMoniker>.NETStandard,Version=v1.6</NuGetTargetMoniker>
   </PropertyGroup>
 </Project>
