@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <AssemblyName>icu.net.netstandard.testsrunner</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>icu.net.netstandard.testsrunner</PackageId>
+    <RuntimeFrameworkVersion>1.0.3</RuntimeFrameworkVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\icu.net.tests\icu.net.netstandard.tests.csproj" />
+    <ProjectReference Include="..\icu.net\icu.net.netstandard.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Icu4c.Win.Full.Lib" Version="56.1.0" />
+    <PackageReference Include="NUnit" Version="3.6.0" />
+    <PackageReference Include="NUnitLite" Version="3.6.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,23 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26216.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "icu.net", "icu.net\icu.net.csproj", "{28A0072F-AE0B-449A-8494-B53F09756273}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "icu.net.tests", "icu.net.tests\icu.net.tests.csproj", "{9D7CFEF4-55F1-4C31-9B7B-EB6520AE4EDB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{ADD2D664-A179-47DE-BE36-94AF75330E29}"
 	ProjectSection(SolutionItems) = preProject
 		..\CHANGELOG.md = ..\CHANGELOG.md
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "icu.net", "icu.net\icu.net.csproj", "{28A0072F-AE0B-449A-8494-B53F09756273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "icu.net.tests", "icu.net.tests\icu.net.tests.csproj", "{9D7CFEF4-55F1-4C31-9B7B-EB6520AE4EDB}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHelper", "TestHelper\TestHelper.csproj", "{F195ADCE-9129-446E-85E0-8EEAD01ED08D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "icu.net.netstandard", "icu.net\icu.net.netstandard.csproj", "{C6920656-0990-4F54-A2E3-038C26018325}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "icu.net.netstandard.tests", "icu.net.tests\icu.net.netstandard.tests.csproj", "{EB079966-AAFA-4B54-9505-6F2A86EDFADF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "icu.net.netstandard.testsrunner", "icu.net.netstandard.testsrunner\icu.net.netstandard.testsrunner.csproj", "{AE410E8E-0588-4CE2-84F6-F73A1D04926A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,6 +152,30 @@ Global
 		{EB079966-AAFA-4B54-9505-6F2A86EDFADF}.ReleaseMono|Mixed Platforms.Build.0 = Release|Any CPU
 		{EB079966-AAFA-4B54-9505-6F2A86EDFADF}.ReleaseMono|x86.ActiveCfg = Release|Any CPU
 		{EB079966-AAFA-4B54-9505-6F2A86EDFADF}.ReleaseMono|x86.Build.0 = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Debug|x86.Build.0 = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.DebugMono|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.DebugMono|Any CPU.Build.0 = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.DebugMono|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.DebugMono|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.DebugMono|x86.ActiveCfg = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.DebugMono|x86.Build.0 = Debug|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.Release|x86.Build.0 = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.ReleaseMono|Any CPU.ActiveCfg = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.ReleaseMono|Any CPU.Build.0 = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.ReleaseMono|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.ReleaseMono|Mixed Platforms.Build.0 = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.ReleaseMono|x86.ActiveCfg = Release|Any CPU
+		{AE410E8E-0588-4CE2-84F6-F73A1D04926A}.ReleaseMono|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
