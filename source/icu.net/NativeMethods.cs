@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Icu.Collation;
+using System.ComponentModel;
 
 namespace Icu
 {
@@ -61,13 +62,13 @@ namespace Icu
 
 		#region Native methods for Windows
 
-		[DllImport("kernel32.dll")]
+		[DllImport("kernel32.dll", SetLastError = true)]
 		private static extern IntPtr LoadLibrary(string dllToLoad);
 
-		[DllImport("kernel32.dll")]
+		[DllImport("kernel32.dll", SetLastError = true)]
 		private static extern bool FreeLibrary(IntPtr hModule);
 
-		[DllImport("kernel32.dll")]
+		[DllImport("kernel32.dll", SetLastError = true)]
 		private static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
 
 		#endregion
@@ -154,7 +155,17 @@ namespace Icu
 			{
 				var libName = string.Format("{0}{1}.dll", basename, icuVersion);
 				var libPath = string.IsNullOrEmpty(_IcuPath) ? libName : Path.Combine(_IcuPath, libName);
+				var testPath = @"D:\git\conniey\sillsdev\icu-dotnet3\source\icu.net.netstandard.testsrunner\bin\Release\netcoreapp1.0\icuuc56.dll";
+
 				handle = LoadLibrary(libPath);
+				var lastError = Marshal.GetLastWin32Error();
+				var handle2 = LoadLibrary(testPath);
+				var lastError2 = Marshal.GetLastWin32Error();
+				if (handle == IntPtr.Zero && lastError != 0)
+				{
+					string errorMessage = new Win32Exception(lastError).Message;
+					throw new InvalidOperationException(errorMessage);
+				}
 			}
 			else
 			{
