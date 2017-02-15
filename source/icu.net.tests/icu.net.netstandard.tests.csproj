@@ -46,14 +46,16 @@
     <None Include="icu.net.netstandard.tests.project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\PlatformAttribute.cs" />
+    <Compile Include="Attributes\SetCultureAttribute.cs" />
     <Compile Include="BreakIteratorTests.Chinese.cs" />
     <Compile Include="BreakIteratorTests.JDKCompatibility.cs" />
     <Compile Include="Collation\CollatorTests.cs" />
     <Compile Include="Collation\SortKeyTests.cs" />
-    <Compile Include="NativeMethodsTests.cs" />
     <Compile Include="Collation\RuleBasedCollatorTests.cs" />
     <Compile Include="LocaleTests.cs" />
     <Compile Include="CharacterTests.cs" />
+    <Compile Include="Attributes\SetUICultureAttribute.cs" />
     <Compile Include="UnicodeStringTests.cs" />
     <Compile Include="UnicodeSetTests.cs" />
     <Compile Include="NormalizerTests.cs" />

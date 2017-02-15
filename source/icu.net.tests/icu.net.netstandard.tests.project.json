@@ -6,6 +6,8 @@
     "NUnit": "3.6.0"
   },
   "frameworks": {
-    "netstandard1.6": {}
+    "netstandard1.6": {
+      "imports": [ "netcoreapp1.0", "dnxcore50" ]
+    }
   }
 }
