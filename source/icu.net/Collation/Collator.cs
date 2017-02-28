@@ -1,4 +1,4 @@
-// Copyright (c) 2013 SIL International
+﻿// Copyright (c) 2013 SIL International
 // This software is licensed under the MIT license (http://opensource.org/licenses/MIT)
 using System;
 using System.Collections.Generic;
@@ -6,10 +6,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
-#if NETSTANDARD1_5
-using Icu.ObjectModel;
-#endif
 
 namespace Icu.Collation
 {
