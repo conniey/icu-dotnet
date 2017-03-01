@@ -1,102 +1,44 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <icu_ver Condition=" '$(icu_ver)' == '' ">54</icu_ver>
-    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
-    <ProjectGuid>{C6920656-0990-4F54-A2E3-038C26018325}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Icu</RootNamespace>
-    <AssemblyName>icu.net</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <TargetFrameworks>net451</TargetFrameworks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+
+  <!-- Full .NET Framework properties -->
+  <PropertyGroup Condition="'$(TargetFramework)' != 'netstandard1.6'">
+    <DefineConstants>$(DefineConstants);FEATURE_ICLONEABLE</DefineConstants>
   </PropertyGroup>
-  <!-- Defining common properties in one location. -->
+
+  <!-- .NETStandard 1.6 properties -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
+    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Properties common to all builds, regardless of target framework -->
   <PropertyGroup>
-    <PlatformAlias>netstandard1.6</PlatformAlias>
-    <DefineConstants>$(DefineConstants);ICU_VER_$(icu_ver);NETSTANDARD</DefineConstants>
-    <ConfiguredBaseOutputPath>$(Configuration)\$(PlatformAlias)</ConfiguredBaseOutputPath>
+    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
     <IntermediateOutputPath>obj\$(ConfiguredBaseOutputPath)</IntermediateOutputPath>
     <OutputPath>..\..\output\$(ConfiguredBaseOutputPath)</OutputPath>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
+
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>icu.net.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="icu.net.netstandard.project.json" />
-    <!-- A reference to the entire .NET Framework is automatically included -->
+
+  <!-- Exclude SortKey because the desktop framework already has this class. -->
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard1.6'">
+    <Compile Remove="SortKey.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Collation\AlternateHandling.cs" />
-    <Compile Include="Collation\CaseFirst.cs" />
-    <Compile Include="Collation\CaseLevel.cs" />
-    <Compile Include="Collation\CollationStrength.cs" />
-    <Compile Include="Collation\Collator.cs" />
-    <Compile Include="Collation\FrenchCollation.cs" />
-    <Compile Include="Collation\HiraganaQuaternary.cs" />
-    <Compile Include="Collation\NormalizationMode.cs" />
-    <Compile Include="Collation\NumericCollation.cs" />
-    <Compile Include="ErrorCode.cs" />
-    <Compile Include="Exceptions\MissingResourceException.cs" />
-    <Compile Include="Locale.cs" />
-    <Compile Include="NativeMethods.Windows.cs" />
-    <Compile Include="Platform.cs" />
-    <Compile Include="Exceptions\BreakException.cs" />
-    <Compile Include="Exceptions\IDNAException.cs" />
-    <Compile Include="Exceptions\RegexException.cs" />
-    <Compile Include="Exceptions\TransliteratorParseException.cs" />
-    <Compile Include="Exceptions\SyntaxErrorException.cs" />
-    <Compile Include="Exceptions\WarningException.cs" />
-    <Compile Include="ParseError.cs" />
-    <Compile Include="Collation\RuleBasedCollator.cs" />
-    <Compile Include="ParseErrorException.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RuleBasedBreakIterator.cs" />
-    <Compile Include="SortKey.cs" />
-    <Compile Include="VersionInfo.cs" />
-    <Compile Include="IcuWrapper.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="Collation\UColRuleOption.cs" />
-    <Compile Include="Collation\UColAttributeValue.cs" />
-    <Compile Include="Collation\UColBoundMode.cs" />
-    <Compile Include="UnicodeString.cs" />
-    <Compile Include="UnicodeSet.cs" />
-    <Compile Include="Normalizer.cs" />
-    <Compile Include="BreakIterator.cs" />
-    <Compile Include="Boundary.cs" />
-  </ItemGroup>
+
   <ItemGroup>
     <None Include="NuGetAssets\icu.net.netstandard.nuspec" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Target Name="AfterBuild" Condition="'$(OS)'!='Unix'">
+
+  <!--<Target Name="AfterBuild" Condition="'$(OS)'!='Unix'">
     <PropertyGroup>
       <NuGetBuildFolder>$(SolutionDir)NuGetBuild/$(PlatformAlias)</NuGetBuildFolder>
       <NuGetAssetsFolder>$(ProjectDir)NuGetAssets</NuGetAssetsFolder>
@@ -112,16 +54,15 @@
     <Copy SourceFiles="$(NuGetAssetsFolder)/icu.net.netstandard.nuspec" DestinationFiles="$(NuGetBuildFolder)/icu.net.nuspec" />
     <Copy SourceFiles="@(IcuDotNetFiles)" DestinationFolder="$(NuGetBuildFolder)/lib/net40" />
     <Copy SourceFiles="@(IcuDotNetCoreFiles)" DestinationFolder="$(NuGetBuildFolder)/lib/$(PlatformAlias)" />
-    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(NuGetBuildFolder)" MetadataAssembly="$(TargetPath)" Version="$(GitVersion_NuGetVersion)" />
-    <Message Importance="High" Text="Created nuget package version $(GitVersion_NuGetVersion) ($(GitVersion_FullSemVer))" />
-  </Target>
-  <PropertyGroup>
-    <PreBuildEvent />
-  </PropertyGroup>
+    
+    --><!--<PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(NuGetBuildFolder)" MetadataAssembly="$(TargetPath)" Version="$(GitVersion_NuGetVersion)" />--><!--
+    <Message Importance="High" Text="Created nuget package version $(GitVersion_NuGetVersion) ($(GitVersion_FullSemVer)). MetadataAssembly: '$(TargetPath)' Version = '$(GitVersion_NuGetVersion)'" />
+  </Target>-->
+
   <!-- NOTE: This is a hack since the GitVersionTask does not exist for .NET 
     Standard. We are piggy backing off of the package import that the full .NET
     Framework library, icu.net, imports into its project. -->
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <GitVersionTaskTargets>..\packages\GitVersionTask.4.0.0-beta0009\build\GitVersionTask.targets</GitVersionTaskTargets>
   </PropertyGroup>
   <Import Project="$(GitVersionTaskTargets)" Condition="Exists('$(GitVersionTaskTargets)')" />
@@ -130,8 +71,5 @@
       <ErrorText>Cannot find file {0} required for GitVersion. Has the GitVersionTask package version in icu.net changed? If so, update Property 'GitVersionTaskTargets' in icu.net.netstandard.csproj with the new path. If not, restore packages in icu.net.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(GitVersionTaskTargets)')" Text="$([System.String]::Format('$(ErrorText)', '$(GitVersionTaskTargets)'))" />
-  </Target>
-  <PropertyGroup>
-    <NuGetTargetMoniker>.NETStandard,Version=v1.6</NuGetTargetMoniker>
-  </PropertyGroup>
+  </Target>-->
 </Project>
