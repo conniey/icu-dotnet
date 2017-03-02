@@ -1,4 +1,4 @@
-// Copyright (c) 2013 SIL International
+﻿// Copyright (c) 2013 SIL International
 // This software is licensed under the MIT license (http://opensource.org/licenses/MIT)
 using System;
 using System.ComponentModel;
@@ -1559,6 +1559,7 @@ namespace Icu
 		/// <param name="text">The text.</param>
 		/// <param name="textLength">Length of the text.</param>
 		/// <param name="errorCode">The error code.</param>
+		/// <param name="parseError">The first parse error encountered when parsing given rules; if any.</param>
 		/// <returns></returns>
 		public static IntPtr ubrk_openRules(
 			string rules, int rulesLength,
@@ -1575,6 +1576,8 @@ namespace Icu
 		/// </summary>
 		/// <param name="bi">The break iterator.</param>
 		/// <param name="text">Text to examine</param>
+		/// <param name="textLength">Length of text to examine</param>
+		/// <param name="errorCode">Error code after setting new text.</param>
 		public static void ubrk_setText(IntPtr bi, string text, int textLength, out ErrorCode errorCode)
 		{
 			if (Methods.ubrk_setText == null)
@@ -1621,7 +1624,7 @@ namespace Icu
 		/// Return the status from the break rule that determined the most recently returned break position.
 		/// </summary>
 		/// <param name="bi">The break iterator.</param>
-		/// <returns></returns>
+		/// <returns>Rule status used to calculate the last break.</returns>
 		public static int ubrk_getRuleStatus(IntPtr bi)
 		{
 			if (Methods.ubrk_getRuleStatus == null)
@@ -1633,7 +1636,10 @@ namespace Icu
 		/// Return the status from the break rule that determined the most recently returned break position.
 		/// </summary>
 		/// <param name="bi">The break iterator.</param>
-		/// <returns></returns>
+		/// <param name="fillInVector">Array to fill all the rule status values with.</param>
+		/// <param name="capacity">The size of the array to fill with rule status values.</param>
+		/// <param name="status">Error code of the call to ubrk_getRuleStatusVector</param>
+		/// <returns>Number of Rule Status values filled in the array.</returns>
 		public static int ubrk_getRuleStatusVec(IntPtr bi,
 			[Out, MarshalAs(UnmanagedType.LPArray)]Int32[] fillInVector,
 			Int32 capacity,
