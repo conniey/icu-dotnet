@@ -59,19 +59,20 @@ namespace Icu
 		private const int RTLD_NOW = 2;
 
 		[DllImport("libdl.so")]
-		private static extern IntPtr dlopen([MarshalAs(UnmanagedType.LPTStr)] string file, int mode);
+		private static extern IntPtr dlopen(string file, int mode);
 
 		[DllImport("libdl.so")]
 		private static extern int dlclose(IntPtr handle);
 
 		[DllImport("libdl.so")]
-		private static extern IntPtr dlsym(IntPtr handle, [MarshalAs(UnmanagedType.LPTStr)] string name);
+		private static extern IntPtr dlsym(IntPtr handle, string name);
 
 		#endregion
 
 		#region Native methods for Windows
 
 		[DllImport("kernel32.dll", SetLastError = true)]
+
 		private static extern IntPtr LoadLibraryEx(string dllToLoad, IntPtr hReservedNull, LoadLibraryFlags dwFlags);
 
 		[DllImport("kernel32.dll")]
