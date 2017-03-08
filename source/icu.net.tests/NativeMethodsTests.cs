@@ -9,8 +9,10 @@ using NUnit.Framework;
 namespace Icu.Tests
 {
 	[TestFixture]
+#if !NETCOREAPP1_1
 	[Platform(Exclude = "Linux",
 		Reason = "These tests require ICU4C installed from NuGet packages which isn't available on Linux")]
+#endif
 	public class NativeMethodsTests
 	{
 		private string _tmpDir;
@@ -24,7 +26,15 @@ namespace Icu.Tests
 
 		private static string OutputDirectory
 		{
-			get { return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath); }
+			get
+			{
+#if NET40
+				Assembly assembly = Assembly.GetExecutingAssembly();
+#else
+				Assembly assembly = typeof(NativeMethodsTests).GetTypeInfo().Assembly;
+#endif
+				return Path.GetDirectoryName(new Uri(assembly.CodeBase).LocalPath);
+			}
 		}
 
 		private string RunTestHelper(string dir, string exeDir = null)
