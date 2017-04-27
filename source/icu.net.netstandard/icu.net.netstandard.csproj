@@ -20,7 +20,8 @@
   </PropertyGroup>
 
   <!-- Properties common to all builds, regardless of target framework -->
-  <PropertyGroup>
+  <!-- Assembly signing is not supported on Linux, yet. -->
+  <PropertyGroup Condition="'$(OS)'=='Windows_NT'">
     <OutputPath>..\..\output\$(Configuration)\$(MSBuildProjectName)</OutputPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(IcuSourceDirectory)\icu.net.snk</AssemblyOriginatorKeyFile>
