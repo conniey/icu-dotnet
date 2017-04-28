@@ -78,7 +78,7 @@
 		<Delete Condition="'$(OS)'=='Windows_NT'"
 			 Files="$(RootDir)/**/obj/**/*" />
 		<Exec Condition="'$(OS)'!='Windows_NT'"
-			Command="find . %5c( -name obj -o -name bin -o -name test-results %5c) -type d -print0 | xargs -0 rm -rf"
+			Command="find . -type d -print0 -name obj -o -name bin -o -name test-results | xargs -0 rm -rf"
 			WorkingDirectory="$(RootDir)" />
 	</Target>
 
