@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
-if [[ -z "$1" ]] ; then
-    echo "Usage: msbuild.sh <path to .dotnet sdk>"
+if [[ -z "$DOTNETSDK" ]] ; then
+    echo "DOTNETSDK variable needs to be set to location of .NET Core SDK (ie. /usr/share/dotnet/sdk/1.0.3)"
     exit 1
 fi
 
-SDK_DIR="$(cd $1 && pwd -P)"
+echo $DOTNETSDK
 
-echo $SDK_DIR
+export MSBuildExtensionsPath=$DOTNETSDK/
+export CscToolExe=$DOTNETSDK/Roslyn/RunCsc.sh
+export MSBuildSDKsPath=$DOTNETSDK/Sdks
 
-export MSBuildExtensionsPath=$SDK_DIR/
-export CscToolExe=$SDK_DIR/Roslyn/RunCsc.sh
-export MSBuildSDKsPath=$SDK_DIR/Sdks
-
-#msbuild "$@"
+msbuild "$@"
