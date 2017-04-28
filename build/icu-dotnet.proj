@@ -16,8 +16,6 @@
 
 		<DotNetCLI Condition="'$(DotNetCLI)' == ''">dotnet</DotNetCLI>
 		<BuildNetCore Condition="'$(BuildNetCore)' == ''">true</BuildNetCore>
-		<SolutionNetCore>icu.net.netstandard.sln</SolutionNetCore>
-		<SolutionNetCorePath Condition="'$(BuildNetCore)' == 'true'">$(SolutionDir)/$(SolutionNetCore)</SolutionNetCorePath>
 	</PropertyGroup>
 
 	<!-- NOTE: this project uses GitVersion (http://gitversion.readthedocs.io) to set the version number. -->
@@ -69,10 +67,14 @@
 	<Target Name="CompileNetCore" DependsOnTargets="DownloadDependencies;RestorePackages"
 		Condition="'$(BuildNetCore)' == 'true'">
 		<PropertyGroup>
+			<SolutionNetCorePath>$(SolutionDir)/icu.net.netstandard.sln</SolutionNetCorePath>
 			<CoreBuildArguments>/t:Build;Pack /p:Configuration=$(ConfigurationNetCore) "$(SolutionNetCorePath)"</CoreBuildArguments>
 		</PropertyGroup>
-
-		<Exec Command='$(DotNetCLI) msbuild $(CoreBuildArguments)'/>
+		<Exec Command="./build/msbuild.sh $(CoreBuildArguments)"
+			WorkingDirectory="$(RootDir)"
+			Condition="'$(IsOnWindows)' != 'true'" />
+		<Exec Command='$(DotNetCLI) msbuild $(CoreBuildArguments)'
+			Condition="'$(IsOnWindows)' == 'true'" />
 	</Target>
 
 	<ItemGroup>
